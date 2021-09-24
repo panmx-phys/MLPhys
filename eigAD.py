@@ -7,11 +7,11 @@ import jax
 def eig(mat):
     return jnp.linalg.eig(mat)
 
-
+@jax.jit
 def eig_fwd(mat):
     res = jnp.linalg.eig(mat)
     return res,res
-
+@jax.jit
 def eig_bwd(res, g):
     e,u = res
     n = e.shape[0]
