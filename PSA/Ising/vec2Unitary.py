@@ -1,7 +1,8 @@
 import jax
+from jax._src.dtypes import dtype
 import jax.numpy as jnp
 
-
+#@jax.jit
 def vec2Unitary(N,input):
     '''
     Converts unitary matrix to a vector of parameters (which parameterize the unitary). This vector effectively parameterizes SU(4).
@@ -14,12 +15,13 @@ def vec2Unitary(N,input):
     Returns:
         A complex (2^N,2^N) array that parameterized by the input vector
     '''
-    mat_size = int(2**N)
+    mat_size = 2**N
 
     # make sure the trace is 0
     vec = jnp.append(input,-jnp.sum(input[-mat_size+1:]))
 
     h_mat = jnp.diag(vec[-mat_size:])
+    
 
 
     count = 0
