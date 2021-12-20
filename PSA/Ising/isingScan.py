@@ -123,8 +123,8 @@ def ising_opt(beta,J,h):
 
     stateMat_to_prob_map = jax.vmap(stateMat_to_prob,(0,None),0)
 
-    eps = random.uniform(key,shape=(N))
-    uniVec = random.uniform(key,shape=(uniParas_num))
+    eps = random.uniform(key,shape=(N,))
+    uniVec = random.uniform(key,shape=(uniParas_num,))
     paras = jnp.hstack((eps,uniVec))
 
 
@@ -153,4 +153,4 @@ def ising_opt(beta,J,h):
     results = scipy.optimize.minimize(value_and_grad_numpy(ising), np.array(paras,dtype=np.float64),
                                     method='L-BFGS-B', jac=True)
 
-    return results.fun
+    return results.fun,float(-jnp.log(jnp.trace(expm(- beta * H))))
