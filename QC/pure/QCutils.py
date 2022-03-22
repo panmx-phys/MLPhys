@@ -91,11 +91,11 @@ class QuCircWithGrad:
         thetaGrad = np.zeros(self.size())
 
         for i in range(self.size()):
-            print("Calculating "+str(i)+"th gradient")
             circPlus, circMinus = circList[i]
             grad1 = r * (circPlus.calc() - circMinus.calc())
+            assert np.abs(np.imag(grad1)) < 0.001
             thetaGrad[i] = grad1
-        
+
         return thetaGrad
             
 
