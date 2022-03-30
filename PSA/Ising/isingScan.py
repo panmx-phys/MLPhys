@@ -12,7 +12,7 @@ key = random.PRNGKey(42)
 config.update("jax_enable_x64", True)
 
 
-N = 5
+N = 6
 
 layer_num = 1
 uniParas_num = layer_num * (2**(2*N)-1)
@@ -153,4 +153,4 @@ def ising_opt(beta,J,h):
     results = scipy.optimize.minimize(value_and_grad_numpy(ising), np.array(paras,dtype=np.float64),
                                     method='L-BFGS-B', jac=True)
 
-    return results.fun,float(-jnp.log(jnp.trace(expm(- beta * H))))
+    return results.fun,jnp.float32(-jnp.log(jnp.trace(expm(- beta * H))))
