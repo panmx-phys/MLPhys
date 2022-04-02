@@ -60,6 +60,29 @@ class QuCircWithGrad:
         self.regiNums.append(registerNum)
         self.gates.append(newGate)
         self.thetas.append(newTheta)
+    
+    def add_Arbitrary_gate(self,registerNum: tuple):
+        '''
+        add a combination of gates creating a space for unitary
+        '''
+        assert len(registerNum) == 2
+
+        for i in range(2):
+            self.add_gate('Rx',registerNum[i])
+            self.add_gate('Ry',registerNum[i])
+            self.add_gate('Rz',registerNum[i])
+        
+        self.add_gate('Rxx',registerNum)
+        self.add_gate('Ryy',registerNum)
+        self.add_gate('Rzz',registerNum)
+
+        for i in range(2):
+            self.add_gate('Rx',registerNum[i])
+            self.add_gate('Ry',registerNum[i])
+            self.add_gate('Rz',registerNum[i])
+
+
+
 
     def genGradCirc(self,gradIdx : int):
         """
