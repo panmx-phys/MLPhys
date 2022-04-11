@@ -1,8 +1,6 @@
-from http.client import NON_AUTHORITATIVE_INFORMATION
 import json
 from datetime import datetime
-from pickle import NONE
-from tkinter.messagebox import NO
+
 
 from sympy import re
 
@@ -39,8 +37,3 @@ def saveTojson(description:str, beta,res, h=_H, J=_J,N = _N, additional = dict()
     with open(jsonFile, 'w') as outfile:
         json.dump(old_data, outfile)
     return
-    
-
-
-
-    
